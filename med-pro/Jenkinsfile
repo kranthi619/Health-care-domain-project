@@ -10,7 +10,7 @@ pipeline {
     stage('CheckOut') {
       steps {
         echo 'Checkout the source code from GitHub'
-        git 'https://github.com/kranthi619/medicure-pro.git'
+        git 'https://github.com/kranthi619/med-pro.git'
             }
     }
     
