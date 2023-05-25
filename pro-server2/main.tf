@@ -28,6 +28,6 @@ resource "aws_instance" "pro-server2" {
   }
 
   provisioner "local-exec" {
-    command = "ansible-playbook /var/lib/jenkins/workspace/pro-server2/pro-servere2/deploy.yml"
+    command = "ansible-playbook /var/lib/jenkins/workspace/pro-server2/pro-servere2/deployment.yml"
   }
 }
