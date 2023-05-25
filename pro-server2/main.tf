@@ -1,4 +1,3 @@
-
 resource "aws_instance" "pro-server2" {
   ami                    = "ami-02eb7a4783e7e9317"
   instance_type          = "t2.medium"
@@ -28,6 +27,9 @@ resource "aws_instance" "pro-server2" {
   }
 
   provisioner "local-exec" {
-    command = "ansible-playbook /var/lib/jenkins/workspace/pro-server2/pro-servere2/deployment.yml"
+    command = "ansible-playbook /var/lib/jenkins/workspace/pro-server2/pro-server2/deployment.yml"
+    working_dir = "/var/lib/jenkins/workspace/pro-server2/pro-server2"
   }
 }
+
+
