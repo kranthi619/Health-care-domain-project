@@ -69,8 +69,15 @@ resource "aws_instance" "pro-server2" {
   }
 
   provisioner "local-exec" {
-    command = "ansible-playbook -i /dev/stdin <<EOF\n${var.yaml_content}\nEOF"
+    command = <<EOF
+    ansible-playbook \
+      --private-key ${path.module}/exampl.pem \
+      --user ubuntu \
+      --timeout 30 \
+      --extra-vars "ansible_python_interpreter=/usr/bin/python3" \
+      -i /dev/stdin <<PLAYBOOK
+${var.yaml_content}
+PLAYBOOK
+EOF
   }
 }
-
-
