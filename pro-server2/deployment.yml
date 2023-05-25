@@ -16,10 +16,10 @@ spec:
         app: medicure
     spec:
       containers:
-      - name: medicure-container
-        image: kranthi619/med-pro
-        ports:
-        - containerPort: 8080
+        - name: medicure-container
+          image: kranthi619/med-pro
+          ports:
+            - containerPort: 8084
 ---
 apiVersion: v1
 kind: Service
@@ -32,7 +32,8 @@ spec:
     app: medicure
   type: NodePort
   ports:
-  - nodePort: 31000
-    port: 8082
-    targetPort: 8082
+    - nodePort: 31000
+      port: 8082
+      targetPort: 8082
+
 
