@@ -24,7 +24,7 @@ resource "aws_instance" "pro-server2" {
   }
 
   provisioner "local-exec" {
-    command = "echo ${aws_instance.pro-server2.public_ip} > inventory"
+    command = "echo ${aws_instance.prod-server2.public_ip} > inventory"
   }
 
   provisioner "local-exec" {
