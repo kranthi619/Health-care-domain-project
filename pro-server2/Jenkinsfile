@@ -1,0 +1,20 @@
+pipeline {
+  agent any
+
+  tools {
+      maven 'maven'
+      terraform 'terraform'
+        }
+	stages{
+	stage ('Configure Prod-server with Terraform, Ansible and then Deploying'){
+            steps {
+                dir('prod-server2'){
+                sh 'chmod 600 exampl.pem'
+                sh 'terraform init'
+                sh 'terraform validate'
+                sh 'terraform apply --auto-approve'
+                }
+	      }
+	      } 
+	      }
+	      }
