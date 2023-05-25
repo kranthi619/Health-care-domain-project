@@ -27,8 +27,48 @@ resource "aws_instance" "pro-server2" {
   }
 
   provisioner "local-exec" {
-    command = "ansible-playbook /var/lib/jenkins/workspace/pro-server2/pro-server2/deployment.yml"
-    working_dir = "/var/lib/jenkins/workspace/pro-server2/pro-server2"
+    command = "ansible-playbook -i /dev/stdin <<EOF\n${yaml_content}\nEOF"
+  }
+
+  locals {
+    yaml_content = <<-EOT
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: medicure
+  labels:
+    app: medicure
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: medicure
+  template:
+    metadata:
+      labels:
+        app: medicure
+    spec:
+      containers:
+        - name: medicure-container
+          image: kranthi619/med-pro
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: medicure-service
+  labels:
+    app: medicure
+spec:
+  selector:
+    app: medicure
+  type: NodePort
+  ports:
+    - nodePort: 31000
+      port: 8082
+      targetPort: 8082
+EOT
   }
 }
 
